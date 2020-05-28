@@ -8,14 +8,13 @@ import { Product } from '../Product';
   styleUrls: ['./productlist.component.css']
 })
 export class ProductlistComponent implements OnInit {
-messsage:string;
-selectedProduct: Product;
-  products: Product[];
+  @Input() products: Product[];
   @Output() selectionChanged = new EventEmitter();
+  selectedProduct: Product;
   constructor(private ps: ProductService) { }
 
   ngOnInit(): void {
-    this.products= this.ps.products;
+   // this.products = this.ps.products;
   }
   selectProduct(event, id) {
     this.setActiveLink(event);
@@ -29,5 +28,4 @@ selectedProduct: Product;
     });
     event.target.setAttribute('class', 'item active');
   }
-
 }

@@ -11,10 +11,17 @@ export class ProductdetailsComponent implements OnInit {
   @Input() product: Product;
   @Output() handleClose = new EventEmitter();
   @Output() handleUpdate = new EventEmitter<Product>();
-  constructor(private ts:ProductService) { }
+
+  constructor(private ps: ProductService) { }
 
   ngOnInit(): void {
-  
   }
 
+  onClose() {
+    this.handleClose.emit(true);
+  }
+
+  onUpdate() {
+    this.handleUpdate.emit(this.product);
+  }
 }

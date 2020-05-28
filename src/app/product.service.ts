@@ -1,12 +1,15 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Input, EventEmitter, Output } from '@angular/core';
 import { Product } from './Product';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  products: Product[];
-  constructor() { 
+  @Input() products: Product[];
+  @Output() selectionChanged = new EventEmitter();
+  selectedProduct: Product;
+  constructor() {
     this.products = [
       {
         id: 1,
@@ -60,5 +63,9 @@ export class ProductService {
       },
     ];
   }
-
+  selectProduct(event, id) {
+   // this.setActiveLink(event);
+    this.selectedProduct = this.products.find(x => x.id === id);
+    this.selectionChanged.emit(this.selectedProduct);
+  }
 }
